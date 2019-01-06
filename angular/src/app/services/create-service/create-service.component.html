@@ -1,0 +1,65 @@
+<div bsModal #createServiceModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="createUserModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog">
+
+        <div #modalContent class="modal-content">
+
+            <form *ngIf="active" #createServiceForm="ngForm" id="frm_create_service" novalidate (ngSubmit)="save()">
+
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <span>{{ "CreateNewService" | localize }}</span>
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input class="form-control" type="text" name="ServiceType" [(ngModel)]="service.serviceType">
+                            <label class="form-label">{{ "ServiceType" | localize }}</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="email" name="Email" class="form-control" [(ngModel)]="service.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$">
+                            <label class="form-label">{{ "Email" | localize }}</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="password" name="Password" class="form-control" [(ngModel)]="service.password">
+                            <label class="form-label">{{ "Password" | localize }} ({{ "Optional" | localize }})</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" name="ClientId" class="form-control" [(ngModel)]="service.clientId">
+                            <label class="form-label">{{ "ClientId" | localize }}</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" name="ClientSecret" class="form-control" [(ngModel)]="service.clientSecret">
+                            <label class="form-label">{{ "ClientSecret" | localize }}</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="">
+                            <input id="isactive" type="checkbox" name="IsActive" [(ngModel)]="service.isActive" checked class="form-control" />
+                            <label for="isactive" class="form-label">{{ "IsActive" | localize }}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{ "Cancel" | localize }}</button>
+                    <button [disabled]="!createServiceForm.form.valid || saving" type="submit" class="btn btn-primary blue">{{ "Save" | localize }}</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
